@@ -1,0 +1,44 @@
+pipeline {
+    agent any
+    
+    tools {
+        // Ensure that these tool names are configured in Jenkins under Global Tool Configuration
+        jdk 'jdk3'
+        maven 'maven3'
+    }
+
+    stages {
+        stage('Checkout') { // Changed 'git checkout ' to 'Checkout' for clarity
+            steps {
+                // Updated Git checkout syntax for better readability
+                git url: 'https://github.com/Aditiyelmar/jenkinsfile-demo.git',
+                    changelog: false,
+                    poll: false
+            }
+        }
+        
+        // Add additional stages as needed
+        stage('Build') {
+            steps {
+                // Example build step using Maven
+                sh 'mvn clean install'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                // Example test step using Maven
+                sh 'mvn test'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline succeeded!'
+        }
+        failure {
+            echo 'Pipeline failed!'
+        }
+    }
+}
