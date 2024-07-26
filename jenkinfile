@@ -1,11 +1,6 @@
 pipeline {
     agent any
     
-    tools {
-        // Ensure that these tool names are configured in Jenkins under Global Tool Configuration
-        jdk 'jdk3'
-        maven 'maven3'
-    }
 
     stages {
         stage('Checkout') { // Changed 'git checkout ' to 'Checkout' for clarity
